@@ -1,3 +1,6 @@
-# editorTXT
-Editor sencillo para escribir texto plano.
-Contiene solo un menu, archivo. Versión 1
+Editor de texto "editorTXT"
+Se agrega menu editar y menu ayuda con sus submenus
+Versión 0.4
+Autor: luisalcantara@jlca.com.mx
+Blog: stacole.com
+Web: jlca.com.mx

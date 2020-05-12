@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import filedialog as FileDialog
-from io import open
+from tkinter import messagebox as MessageBox
 
 #Esta ruta se utiliza para almacenar un nuevo fichero
 ruta = ""
@@ -51,24 +51,51 @@ def guardar_como():
     else:
         mensaje.set("Guardado cancelado")
         ruta = ""
-
+#Editar
+def cortar():
+    texto.event_generate("<<Cut>>")
+def seleccionarTodo():
+    texto.event_generate("<<SelectAll>>")
+def copiar():
+    texto.event_generate("<<Copy>>")
+def pegar():
+    texto.event_generate("<<Paste>>")
+#Ayuda
+def acercaDe():
+    MessageBox.showinfo("Editor de texto" , "Notepad versión 0.4\nluisalcantara@jlca.com.mx")
 
 root = Tk()
 
 root.title("Editor")
 root.resizable(1,1)
 root.iconbitmap("")
+root.geometry('700x700')
 
 #Menú superior
 menubar = Menu(root)
 filemenu = Menu(menubar, tearoff=0)
+editmenu = Menu(menubar, tearoff=0)
+helpmenu = Menu(menubar, tearoff=0)
+
+#Archivo
 filemenu.add_command(label="Nuevo", command=nuevo)
 filemenu.add_command(label="Abrir", command=abrir)
 filemenu.add_command(label="Guardar", command=guardar)
 filemenu.add_command(label="Guardar como", command=guardar_como)
 filemenu.add_separator()
-filemenu.add_command(label="Salir", command=root.quit)
+filemenu.add_command(label="Salir", activebackground="red", command=root.quit)
 menubar.add_cascade(menu=filemenu, label="Archivo")
+
+#Editar
+editmenu.add_command(label="Seleccionar Todo        (Ctrl+shift+A)", command=seleccionarTodo)
+editmenu.add_command(label='Cortar                          (ctrl+X)', command=cortar)
+editmenu.add_command(label="Copiar                          (Ctrl+C)", command=copiar)
+editmenu.add_command(label="Pegar                           (Ctrl+V)", command=pegar)
+menubar.add_cascade(label="Editar", menu=editmenu)
+
+#Ayuda
+helpmenu.add_command(label="Acerca de...", command=acercaDe)
+menubar.add_cascade(label="Ayuda", menu=helpmenu)
 
 #Caja de texto central
 texto = Text(root)
